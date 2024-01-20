@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="image\apple-touch-icon.png">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <!-- <link href="css/styles.css" rel="stylesheet"> -->
+    <link href="css/styles.css" rel="stylesheet">
+    <title>Task</title>
+</head>
+
+<body>
+    <div class="admin-table">
+        <div class="">
+            <table class="">
+                <thead>
+                    <tr>
+                        <th class="">User Id</th>
+                        <th class="">Name</th>
+                        <th class="">Photo</th>
+                        <th class="">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% result.forEach(data=> { %>
+                        <tr>
+                            <td>
+                                <%=JSON.stringify(data.userID).slice(1,6)%>
+                            </td>
+                            <td>
+                                <%=data.userName%>
+                            </td>
+                            <td>
+                                <img class="w-50" src=<%=data.imgUrl%>>
+                            </td>
+                            <td>
+                                <% if (data.msg==="Not Accepted by Admin" ) { %>
+                                    <button type="button" class="btn btn-primary" id="deleteButton"><a class="giga"
+                                            href="/delete/<%=data.userID%>">Delete</a></button>
+                                    <button class="btn btn-outline-primary" id="doneButton"><a
+                                            href="/patch/<%= data.userID %>">Done</a></button>
+                                    <% } %>
+                                        <% if (data.msg==="Accepted by Admin" ) { %>
+                                            <button class="btn btn-outline-primary" id="doneButton"><a
+                                                    href="/patch/<%= data.userID %>">Done</a></button>
+                                            <% } %>
+                            </td>
+                        </tr>
+                        <%}) %>
+                </tbody>
+            </table>
+        </div>
+        <p class="text-muted">&copy; Rajat Sharma</p>
+    </div>
+    <script src="js/view.js"></script>
+</body>
+
+</html>
